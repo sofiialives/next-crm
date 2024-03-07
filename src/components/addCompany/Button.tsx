@@ -2,11 +2,11 @@
 import clsx from 'clsx';
 import React, { ButtonHTMLAttributes } from 'react';
 
-interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-export default function Button({ disabled, ...rest }: buttonProps) {
+export default function Button({ disabled, ...rest }: ButtonProps) {
   return (
     <button
       {...rest}

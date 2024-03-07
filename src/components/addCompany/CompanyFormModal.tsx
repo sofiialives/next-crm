@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import Modal, { ModalProps } from './modal';
 import CompanyForm, { CompanyFormProps } from './CompanyForm';
+import Modal, { ModalProps } from './Modal';
 
 interface CompanyFormModalProps extends ModalProps {
   onSubmit: CompanyFormProps['onSubmit'];

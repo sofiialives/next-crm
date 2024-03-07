@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import Button from './button';
+import Button from './Button';
 import dynamic from 'next/dynamic';
 const CompanyFormModal = dynamic(() => import('./CompanyFormModal'), {
   ssr: false,
@@ -15,7 +15,7 @@ export default function AddCompanyBtn() {
         onSubmit={console.log}
         show={show}
         onClose={() => setShow(false)}
-      ></CompanyFormModal>
+      />
     </>
   );
 }
