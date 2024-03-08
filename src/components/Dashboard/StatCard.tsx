@@ -19,7 +19,7 @@ export default function StatCard({ title, number, type, id }: StatCardProps) {
       className={clsx(
         "rounded",
         type === StatCardType.Dark &&
-          `pt-3 px-3 bg-gray-900 od:text-purple-200 even:text-lime-200 text-right `,
+          "pt-3 px-3 bg-gray-900 odd:text-purple-200 even:text-lime-200 text-right",
         type === StatCardType.Gradient &&
           `p-7 bg-[url('/images/mesh-gradient-${
             id + 1

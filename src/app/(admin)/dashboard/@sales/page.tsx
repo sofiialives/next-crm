@@ -8,11 +8,12 @@ interface SalesProps {}
 
 export default function Sales({}: SalesProps) {
   const companies = [
-    { title: "Rozetka", sold: "500", income: "1000" },
-    { title: "Rozetka", sold: "500", income: "1000" },
-    { title: "Rozetka", sold: "500", income: "1000" },
-    { title: "Rozetka", sold: "500", income: "1000" },
-    { title: "Rozetka", sold: "500", income: "1000" },
+    { title: "Rozetka", sold: "500", income: "$1000" },
+    { title: "Rozetka", sold: "500", income: "$1000" },
+    { title: "Rozetka", sold: "500", income: "$1000" },
+    { title: "Rozetka", sold: "500", income: "$1000" },
+    { title: "Rozetka", sold: "500", income: "$1000" },
+    { title: "Rozetka", sold: "500", income: "$1000" },
   ];
   return (
     <DashboardItem title="Sales details">
