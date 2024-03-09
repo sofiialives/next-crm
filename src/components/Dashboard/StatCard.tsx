@@ -8,9 +8,9 @@ export enum StatCardType {
 }
 
 interface StatCardProps {
-  id: number;
+  id: string;
   title: string;
-  number: string;
+  number: number;
   type: StatCardType;
 }
 
@@ -21,10 +21,10 @@ export default function StatCard({ title, number, type, id }: StatCardProps) {
         "rounded",
         type === StatCardType.Dark &&
           `${
-            id % 2 === 0 ? "text-purple-200" : "text-lime-200"
+            Number(id) % 2 === 0 ? "text-purple-200" : "text-lime-200"
           } pt-3 px-3 bg-gray-900  text-right`,
         type === StatCardType.Gradient && [
-          styles[`bg${(id % 4) + 1}`],
+          styles[`bg${(Number(id) % 4) + 1}`],
           "p-7 bg-no-repeat text-gray-900 text-left",
         ]
       )}

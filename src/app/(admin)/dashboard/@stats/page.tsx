@@ -1,24 +1,27 @@
 import StatCard, { StatCardType } from "@/components/Dashboard/StatCard";
-import clsx from "clsx";
+import { getStats } from "@/lib/actions";
+import { StatsI } from "@/lib/interface";
 import React from "react";
 
 interface StatsProps {}
 
-export default function Stats({}: StatsProps) {
-  const stats = [
-    { title: "Total promotions", number: "432" },
-    { title: "Total category", number: "8" },
-    { title: "New companies", number: "28" },
-    { title: "Total active companies", number: "670" },
-  ];
+const label: Record<keyof StatsI, string> = {
+  promotions: "Total promotions",
+  categories: "Total category",
+  newCompanies: "New companies",
+  activeCompanies: "Total active companies",
+};
+
+export default async function Stats({}: StatsProps) {
+  const data = await getStats();
   return (
     <ul className="grid grid-cols-12 gap-5">
-      {stats.map((stat, index) => (
-        <li key={index} className="col-span-3 ">
+      {(Object.keys(label) as (keyof StatsI)[]).map((key) => (
+        <li key={key} className="col-span-3 ">
           <StatCard
-            id={index}
-            title={stat.title}
-            number={stat.number}
+            id={key}
+            title={label[key]}
+            number={data[key]}
             type={StatCardType.Gradient}
           />
         </li>

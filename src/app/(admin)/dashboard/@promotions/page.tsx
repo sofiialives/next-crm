@@ -2,20 +2,13 @@ import DashboardItem from "@/components/Dashboard/DashboardItem";
 import DashboardTable from "@/components/Dashboard/Table/DashboardTable";
 import DashboardTableBody from "@/components/Dashboard/Table/DashboardTableBody";
 import DashboardTableHeaders from "@/components/Dashboard/Table/DashboardTableHeaders";
+import { getPromotions } from "@/lib/actions";
 import React from "react";
 
 interface PromotionsProps {}
 
-export default function Promotions({}: PromotionsProps) {
-  const promotions = [
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-40%" },
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-25%" },
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-5%" },
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-24%" },
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-80%" },
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-10%" },
-    { title: "Rozetka", name: "Norem ipsum dolor", income: "-80%" },
-  ];
+export default async function Promotions({}: PromotionsProps) {
+  const promotions = await getPromotions();
   return (
     <DashboardItem title="Promotions">
       <DashboardTable
@@ -31,10 +24,10 @@ export default function Promotions({}: PromotionsProps) {
           <tr key={index}>
             <DashboardTableBody>{promotion.title}</DashboardTableBody>
             <DashboardTableBody align="center">
-              {promotion.name}
+              {promotion.companyTitle}
             </DashboardTableBody>
             <DashboardTableBody align="center">
-              {promotion.income}
+              {promotion.discount}%
             </DashboardTableBody>
           </tr>
         ))}
