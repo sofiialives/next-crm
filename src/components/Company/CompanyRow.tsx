@@ -1,23 +1,24 @@
 import React from "react";
-import StatusLabel, { Status } from "../Status/StatusLabel";
+import StatusLabel from "../Status/StatusLabel";
 import Image from "next/image";
 import clsx from "clsx";
+import { CompanyStatus } from "@/lib/interface";
 
 interface CompanyRowProps {
-  id: number;
+  id: string;
   category: string;
   company: string;
-  status: Status;
+  status: CompanyStatus;
   promotion: boolean;
   country: string;
   joinedDate: string;
 }
 
 const labelStatus = {
-  [Status.Active]: "Active",
-  [Status.NotActive]: "Not Active",
-  [Status.Pending]: "Pending",
-  [Status.Suspended]: "Suspended",
+  [CompanyStatus.Active]: "Active",
+  [CompanyStatus.NotActive]: "Not Active",
+  [CompanyStatus.Pending]: "Pending",
+  [CompanyStatus.Suspended]: "Suspended",
 };
 
 export default function CompanyRow({

@@ -2,19 +2,13 @@ import DashboardItem from "@/components/Dashboard/DashboardItem";
 import DashboardTable from "@/components/Dashboard/Table/DashboardTable";
 import DashboardTableBody from "@/components/Dashboard/Table/DashboardTableBody";
 import DashboardTableHeaders from "@/components/Dashboard/Table/DashboardTableHeaders";
+import { getSales } from "@/lib/actions";
 import React from "react";
 
 interface SalesProps {}
 
-export default function Sales({}: SalesProps) {
-  const companies = [
-    { title: "Rozetka", sold: "500", income: "$1000" },
-    { title: "Rozetka", sold: "500", income: "$1000" },
-    { title: "Rozetka", sold: "500", income: "$1000" },
-    { title: "Rozetka", sold: "500", income: "$1000" },
-    { title: "Rozetka", sold: "500", income: "$1000" },
-    { title: "Rozetka", sold: "500", income: "$1000" },
-  ];
+export default async function Sales({}: SalesProps) {
+  const companies = await getSales();
   return (
     <DashboardItem title="Sales details">
       <DashboardTable
@@ -26,14 +20,14 @@ export default function Sales({}: SalesProps) {
           </>
         }
       >
-        {companies.map((company, index) => (
-          <tr key={index}>
-            <DashboardTableBody>{company.title}</DashboardTableBody>
+        {companies.map((company) => (
+          <tr key={company.companyId}>
+            <DashboardTableBody>{company.companyTitle}</DashboardTableBody>
             <DashboardTableBody align="center">
               {company.sold}
             </DashboardTableBody>
             <DashboardTableBody align="center">
-              {company.income}
+              ${company.income}
             </DashboardTableBody>
           </tr>
         ))}
