@@ -1,6 +1,6 @@
 import DashboardItem from "@/components/Dashboard/DashboardItem";
 import StatCard, { StatCardType } from "@/components/Dashboard/StatCard";
-import { getCategories, getCompanies, getStats } from "@/lib/actions";
+import { getCategories, getCompanies } from "@/lib/actions";
 import { getCountById } from "@/lib/utils/getCountById";
 import React from "react";
 
