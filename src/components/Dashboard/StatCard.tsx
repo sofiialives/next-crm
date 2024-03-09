@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React from "react";
+import styles from "./statcard.module.css";
 
 export enum StatCardType {
   Dark = "dark",
@@ -19,11 +20,13 @@ export default function StatCard({ title, number, type, id }: StatCardProps) {
       className={clsx(
         "rounded",
         type === StatCardType.Dark &&
-          "pt-3 px-3 bg-gray-900 odd:text-purple-200 even:text-lime-200 text-right",
-        type === StatCardType.Gradient &&
-          `p-7 bg-[url('/images/mesh-gradient-${
-            id + 1
-          }.svg')] bg-no-repeat text-gray-900 text-left`
+          `${
+            id % 2 === 0 ? "text-purple-200" : "text-lime-200"
+          } pt-3 px-3 bg-gray-900  text-right`,
+        type === StatCardType.Gradient && [
+          styles[`bg${(id % 4) + 1}`],
+          "p-7 bg-no-repeat text-gray-900 text-left",
+        ]
       )}
     >
       <p
