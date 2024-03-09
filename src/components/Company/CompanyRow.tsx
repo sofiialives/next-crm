@@ -2,66 +2,46 @@ import React from "react";
 import StatusLabel from "../Status/StatusLabel";
 import Image from "next/image";
 import clsx from "clsx";
-import { CompanyStatus } from "@/lib/interface";
+import { CompanyI } from "@/lib/interface";
+import Link from "next/link";
 
 interface CompanyRowProps {
-  id: string;
-  category: string;
-  company: string;
-  status: CompanyStatus;
-  promotion: boolean;
-  country: string;
-  joinedDate: string;
+  company: CompanyI;
 }
 
-const labelStatus = {
-  [CompanyStatus.Active]: "Active",
-  [CompanyStatus.NotActive]: "Not Active",
-  [CompanyStatus.Pending]: "Pending",
-  [CompanyStatus.Suspended]: "Suspended",
-};
-
-export default function CompanyRow({
-  id,
-  category,
-  company,
-  status,
-  promotion,
-  country,
-  joinedDate,
-}: CompanyRowProps) {
+export default function CompanyRow({ company }: CompanyRowProps) {
   return (
     <tr className="h-14 text-center text-gray-900 bg-white">
       <td className="text-l font-medium text-blue-700 rounded-l border-l-4 border-blue-700">
-        {category}
+        {company.categoryTitle}
       </td>
       <td>
-        <a href={`/companies/${id}`}>{company}</a>
+        <Link href={`/companies/${company.id}`}>{company.title}</Link>
       </td>
       <td>
-        <StatusLabel status={status}>{labelStatus[status]}</StatusLabel>
+        <StatusLabel status={company.status}>{company.status}</StatusLabel>
       </td>
       <td>
         <div className="inline-flex items-center gap-1">
           <Image
             width={16}
             height={16}
-            src={`/icons/${promotion ? "check.svg" : "x-mark.svg"}`}
+            src={`/icons/${company.hasPromotions ? "check.svg" : "x-mark.svg"}`}
             alt="promotion icon"
           />
           <span
             className={clsx(
               "text sm font-medium",
-              promotion ? "text-green-700" : "text-red-700"
+              company.hasPromotions ? "text-green-700" : "text-red-700"
             )}
           >
-            {promotion ? "Yes" : "No"}
+            {company.hasPromotions ? "Yes" : "No"}
           </span>
         </div>
       </td>
-      <td>{country}</td>
+      <td>{company.countryTitle}</td>
       <td className="rounded-r">
-        {new Date(joinedDate).toLocaleDateString("uk-UA")}
+        {new Date(company.joinedDate).toLocaleDateString("uk-UA")}
       </td>
     </tr>
   );
