@@ -3,13 +3,18 @@ import clsx from "clsx";
 import React from "react";
 
 interface StatusLabelProps {
-  children: React.ReactNode;
   status: CompanyStatus;
   disabled?: boolean;
 }
 
+const labelStatus = {
+  [CompanyStatus.Active]: "Active",
+  [CompanyStatus.NotActive]: "Not Active",
+  [CompanyStatus.Pending]: "Pending",
+  [CompanyStatus.Suspended]: "Suspended",
+};
+
 export default function StatusLabel({
-  children,
   status,
   disabled,
 }: StatusLabelProps) {
@@ -27,7 +32,7 @@ export default function StatusLabel({
       )}
     >
       <div className="w-1 h-1 mr-2 rounded-full bg-current" />
-      {children}
+      {labelStatus[status]}
     </div>
   );
 }

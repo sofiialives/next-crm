@@ -19,7 +19,7 @@ export default function CompanyRow({ company }: CompanyRowProps) {
         <Link href={`/companies/${company.id}`}>{company.title}</Link>
       </td>
       <td>
-        <StatusLabel status={company.status}>{company.status}</StatusLabel>
+        <StatusLabel status={company.status} />
       </td>
       <td>
         <div className="inline-flex items-center gap-1">

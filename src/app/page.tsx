@@ -7,10 +7,10 @@ export default function Home() {
     <main>
       <h1 className="text-xl">Hello</h1>
       <AddCompanyBtn />
-      <StatusLabel status={CompanyStatus.Active}>Active</StatusLabel>
-      <StatusLabel status={CompanyStatus.NotActive}>Not Active</StatusLabel>
-      <StatusLabel status={CompanyStatus.Pending}>Pending</StatusLabel>
-      <StatusLabel status={CompanyStatus.Suspended}>Suspended</StatusLabel>
+      <StatusLabel status={CompanyStatus.Active} />
+      <StatusLabel status={CompanyStatus.NotActive} />
+      <StatusLabel status={CompanyStatus.Pending} />
+      <StatusLabel status={CompanyStatus.Suspended} />
     </main>
   );
 }

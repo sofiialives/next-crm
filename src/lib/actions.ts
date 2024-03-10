@@ -29,7 +29,7 @@ export const getCompanies = (init?: RequestInit) => {
 };
 
 export const getCompany = (id: string, init?: RequestInit) => {
-  return sendRequest<CompanyI[]>(buildUrl("companies", id), init);
+  return sendRequest<CompanyI>(buildUrl("companies", id), init);
 };
 
 export const getPromotions = async (
