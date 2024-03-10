@@ -1,3 +1,4 @@
+"use client";
 import { getCompanies } from "@/lib/actions";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";

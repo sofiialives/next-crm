@@ -20,13 +20,8 @@ export default async function Companies({}: CompaniesProps) {
   });
 
   const dehydratedState = dehydrate(queryClient);
-
   return (
     <HydrationBoundary state={dehydratedState}>
-      <Header>Companies</Header>
-      <Toolbar action={<AddCompanyBtn />}>
-        <SearchInput />
-      </Toolbar>
       <CompanyTable />
     </HydrationBoundary>
   );
