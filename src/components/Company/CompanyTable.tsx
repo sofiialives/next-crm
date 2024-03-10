@@ -1,18 +1,26 @@
+"use client";
+import { getCompanies } from "@/lib/actions";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import CompanyRow from "./CompanyRow";
 
-interface CompanyTableProps {
-  children: React.ReactNode;
-}
+interface CompanyTableProps {}
 
-export default function CompanyTable({ children }: CompanyTableProps) {
-  const headers = [
-    "Category",
-    "Company",
-    "Status",
-    "Promotion",
-    "Country",
-    "Joined date",
-  ];
+const headers = [
+  "Category",
+  "Company",
+  "Status",
+  "Promotion",
+  "Country",
+  "Joined date",
+];
+
+export default function CompanyTable({}: CompanyTableProps) {
+  const { data } = useQuery({
+    queryKey: ["companies"],
+    queryFn: () => getCompanies(),
+    staleTime: 10 * 1000,
+  });
 
   return (
     <div className="py-8 px-10 bg-gray-100">
@@ -26,7 +34,11 @@ export default function CompanyTable({ children }: CompanyTableProps) {
             ))}
           </tr>
         </thead>
-        <tbody>{children}</tbody>
+        <tbody>
+          {data?.map((company) => (
+            <CompanyRow key={company.id} company={company} />
+          ))}
+        </tbody>
       </table>
     </div>
   );
