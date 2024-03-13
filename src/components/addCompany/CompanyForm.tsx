@@ -1,8 +1,9 @@
-'use client';
-import { Form, Formik } from 'formik';
-import React from 'react';
-import InputField from './InputField';
-import LogoUploader from './LogoUploader';
+"use client";
+import { Form, Formik } from "formik";
+import React from "react";
+import InputField from "./InputField";
+import LogoUploader from "./LogoUploader";
+import Button from "./Button";
 
 interface CompanyFieldValues {
   name: string;
@@ -14,12 +15,12 @@ interface CompanyFieldValues {
 }
 
 const initialValues: CompanyFieldValues = {
-  name: '',
-  status: '',
-  country: '',
-  category: '',
-  date: '',
-  description: '',
+  name: "",
+  status: "",
+  country: "",
+  category: "",
+  date: "",
+  description: "",
 };
 
 export interface CompanyFormProps {
@@ -52,6 +53,7 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
             />
           </div>
         </div>
+        <Button>Add company</Button>
       </Form>
     </Formik>
   );

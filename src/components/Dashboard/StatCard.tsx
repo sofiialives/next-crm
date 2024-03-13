@@ -24,7 +24,7 @@ export default function StatCard({ title, number, type, id }: StatCardProps) {
             Number(id) % 2 === 0 ? "text-purple-200" : "text-lime-200"
           } pt-3 px-3 bg-gray-900  text-right`,
         type === StatCardType.Gradient && [
-          styles[`bg${(Number(id) % 4) + 1}`],
+          styles[`bg${1}`],
           "p-7 bg-no-repeat text-gray-900 text-left",
         ]
       )}
