@@ -1,5 +1,3 @@
-import path from "path";
-
 const MOCKAPI_API = process.env.MOCKAPI;
 
 export const buildUrl = (...paths: string[]) =>

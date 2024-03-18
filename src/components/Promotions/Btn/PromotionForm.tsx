@@ -52,16 +52,20 @@ export default async function PromotionForm({
   });
 
   const handleSubmit = async (values: PromotionFieldValues) => {
-    if (company) {
-      await mutateAsync({
-        ...values,
-        discount: Number(values.discount || 0),
-        companyId: company.id,
-        companyTitle: company.title,
-      });
+    if (!company) {
+      return;
     }
 
-    if (onSubmit) onSubmit(values);
+    await mutateAsync({
+      ...values,
+      discount: Number(values.discount) || 0,
+      companyId: company.id,
+      companyTitle: company.title,
+    });
+
+    if (onSubmit) {
+      onSubmit(values);
+    }
   };
 
   return (
@@ -85,7 +89,9 @@ export default async function PromotionForm({
           />
           <LogoUploader square label="Image" placeholder="Upload photo" />
         </div>
-        <Button disabled={isPending}>Add promotion</Button>
+        <Button type="submit" disabled={isPending}>
+          Add promotion
+        </Button>
       </Form>
     </Formik>
   );

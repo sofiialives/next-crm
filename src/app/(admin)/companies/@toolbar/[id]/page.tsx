@@ -7,7 +7,7 @@ interface PageProps {
   params: { id: string };
 }
 
-export default async function Page({ params }: PageProps) {
+export default function Page({ params }: PageProps) {
   return (
     <Toolbar action={<AddPromotionBtn companyId={params.id} />}>
       <SearchInput />
