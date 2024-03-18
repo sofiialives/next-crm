@@ -1,25 +1,21 @@
 "use client";
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+import React from "react";
 import Button from "@/components/addCompany/Button";
-const PromotionFormModal = dynamic(() => import("./PromotionFormModal"), {
-  ssr: false,
-});
+import { useRouter } from "next/navigation";
 
 interface AddPromotionBtnProps {
   companyId: string;
 }
 
 export default function AddPromotionBtn({ companyId }: AddPromotionBtnProps) {
-  const [show, setShow] = useState(false);
+  const router = useRouter();
   return (
-    <>
-      <Button onClick={() => setShow(true)}>Add promotion</Button>
-      <PromotionFormModal
-        companyId={companyId}
-        show={show}
-        onClose={() => setShow(false)}
-      />
-    </>
+    <Button
+      onClick={() =>
+        router.push(`/companies/${companyId}/new-promotion`, { scroll: false })
+      }
+    >
+      Add promotion
+    </Button>
   );
 }

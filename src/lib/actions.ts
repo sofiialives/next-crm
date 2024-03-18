@@ -55,3 +55,18 @@ export const createPromotion = async (
     },
   });
 };
+
+export const createCompany = async (
+  data: Omit<CompanyI, "id" | "hasPromotions">,
+  init?: RequestInit
+) => {
+  return sendRequest<CompanyI>(buildUrl("companies"), {
+    ...init,
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      ...(init && init.headers),
+      "content-type": "application/json",
+    },
+  });
+};

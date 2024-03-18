@@ -4,32 +4,72 @@ import React from "react";
 import InputField from "./InputField";
 import LogoUploader from "./LogoUploader";
 import Button from "./Button";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createCompany, getCategories, getCountries } from "@/lib/actions";
+import { CompanyStatus } from "@/lib/interface";
 
 interface CompanyFieldValues {
-  name: string;
-  status: string;
-  country: string;
-  category: string;
-  date: string;
+  title: string;
   description: string;
+  status: CompanyStatus;
+  joinedDate: string;
+  categoryId: string;
+  countryId: string;
 }
 
 const initialValues: CompanyFieldValues = {
-  name: "",
-  status: "",
-  country: "",
-  category: "",
-  date: "",
+  title: "",
   description: "",
+  status: CompanyStatus.Active,
+  joinedDate: "",
+  categoryId: "",
+  countryId: "",
 };
 
 export interface CompanyFormProps {
-  onSubmit: (values: CompanyFieldValues) => void | Promise<void>;
+  onSubmit?: (values: CompanyFieldValues) => void | Promise<void>;
 }
 
 export default function CompanyForm({ onSubmit }: CompanyFormProps) {
+  const queryClient = useQueryClient();
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+    staleTime: 10 * 1000,
+  });
+
+  const { data: countries } = useQuery({
+    queryKey: ["countries"],
+    queryFn: getCountries,
+    staleTime: 10 * 1000,
+  });
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: createCompany,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["companies"],
+      });
+    },
+  });
+
+  const handleSubmit = async (values: CompanyFieldValues) => {
+    await mutateAsync({
+      ...values,
+      categoryTitle:
+        categories?.find(({ id }) => id === values.categoryId)?.title ?? "",
+      countryTitle:
+        countries?.find(({ id }) => id === values.countryId)?.title ?? "",
+    });
+
+    if (onSubmit) {
+      onSubmit(values);
+    }
+  };
+
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <Form className="flex flex-col gap-10">
         <h2 className="mb-0.5 text-xl">Add new company</h2>
         <div className="flex gap-6">
