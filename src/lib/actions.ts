@@ -41,3 +41,32 @@ export const getPromotions = async (
     init
   );
 };
+
+export const createPromotion = async (
+  data: Omit<PromotionI, "id">,
+  init?: RequestInit
+) => {
+  return sendRequest<PromotionI>(buildUrl("promotions"), {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      ...(init && init.headers),
+      "content-type": "application/json",
+    },
+  });
+};
+
+export const createCompany = async (
+  data: Omit<CompanyI, "id" | "hasPromotions">,
+  init?: RequestInit
+) => {
+  return sendRequest<CompanyI>(buildUrl("companies"), {
+    ...init,
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      ...(init && init.headers),
+      "content-type": "application/json",
+    },
+  });
+};

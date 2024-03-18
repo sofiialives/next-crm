@@ -1,7 +1,6 @@
 import StatCard, { StatCardType } from "@/components/Dashboard/StatCard";
 import { getStats } from "@/lib/actions";
 import { StatsI } from "@/lib/interface";
-import { revalidatePath } from "next/cache";
 import React from "react";
 
 interface StatsProps {}
